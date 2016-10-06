@@ -36,6 +36,8 @@ class SortTest extends RestApiUnitTestRunner
         $this->assertEquals(5, count($this->response->getResourceData()));
         $this->assertEquals(200, $this->response->getStatusCode());
         $this->assertEquals('OK', $this->response->getReasonPhrase());
+        $this->assertEquals(['0-4/5'], $this->response->getHeader('Content-Range'));
+        $this->assertEquals(['resource 50'], $this->response->getHeader('Accept-Range'));
 
         $titles = [];
         foreach ($this->response->getResourceData() as $item) {
@@ -54,6 +56,8 @@ class SortTest extends RestApiUnitTestRunner
         $this->assertEquals(5, count($this->response->getResourceData()));
         $this->assertEquals(200, $this->response->getStatusCode());
         $this->assertEquals('OK', $this->response->getReasonPhrase());
+        $this->assertEquals(['0-4/5'], $this->response->getHeader('Content-Range'));
+        $this->assertEquals(['resource 50'], $this->response->getHeader('Accept-Range'));
 
         $form = $type = $titles = [];
         foreach ($this->response->getResourceData() as $item) {
@@ -76,6 +80,8 @@ class SortTest extends RestApiUnitTestRunner
         $this->assertEquals(5, count($this->response->getResourceData()));
         $this->assertEquals(200, $this->response->getStatusCode());
         $this->assertEquals('OK', $this->response->getReasonPhrase());
+        $this->assertEquals(['0-4/5'], $this->response->getHeader('Content-Range'));
+        $this->assertEquals(['resource 50'], $this->response->getHeader('Accept-Range'));
 
         $titles = [];
         foreach ($this->response->getResourceData() as $item) {

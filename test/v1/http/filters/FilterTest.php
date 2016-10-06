@@ -36,6 +36,8 @@ class FilterTest extends RestApiUnitTestRunner
         $this->assertEquals(3, count($this->response->getResourceData()));
         $this->assertEquals(200, $this->response->getStatusCode());
         $this->assertEquals('OK', $this->response->getReasonPhrase());
+        $this->assertEquals(['0-2/3'], $this->response->getHeader('Content-Range'));
+        $this->assertEquals(['resource 50'], $this->response->getHeader('Accept-Range'));
 
         foreach ($this->response->getResourceData() as $item) {
             $this->assertEquals('citrus', $item['type']);
@@ -51,6 +53,9 @@ class FilterTest extends RestApiUnitTestRunner
         $this->assertEquals(2, count($this->response->getResourceData()));
         $this->assertEquals(200, $this->response->getStatusCode());
         $this->assertEquals('OK', $this->response->getReasonPhrase());
+
+        $this->assertEquals('OK', $this->response->getReasonPhrase());
+        $this->assertEquals(['0-1/2'], $this->response->getHeader('Content-Range'));
 
         foreach ($this->response->getResourceData() as $item) {
             $this->assertTrue(in_array($item['type'], ['citrus', 'vegetable']));

@@ -35,6 +35,9 @@ class GetResourceTest extends RestApiUnitTestRunner
         $this->assertEquals(5, count($this->response->getResourceData()));
         $this->assertEquals(1, $this->response->getResourceData()['id']);
         $this->assertEquals(200, $this->response->getStatusCode());
+        $this->assertEquals('OK', $this->response->getReasonPhrase());
+        $this->assertEquals([], $this->response->getHeader('Content-Range'));
+        $this->assertEquals([], $this->response->getHeader('Accept-Range'));
     }
 
     /**
