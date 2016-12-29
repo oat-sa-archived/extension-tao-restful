@@ -80,6 +80,7 @@ abstract class RestApiUnitTestRunner extends TaoPhpUnitTestRunner
         $res = $res->withStatus($router->getStatusCode());
         $this->addHeadersInResponse($router->getHeaders(), $res);
         $res->write($encoder->encode($router->getBodyData()));
+        return $res;
     }
     
     private function addHeadersInResponse(array $addHeaders, Response &$res)

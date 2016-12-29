@@ -32,9 +32,14 @@ class DataFormat implements HttpDataFormatInterface
 
     private $acceptedMimeTypes = [
         'application/json' => 'JsonEncoder',
-        'text/xml' => 'XmlEncoder', 
-        'application/xml' => 'XmlEncoder', 
+        'text/xml' => 'XmlEncoder',
+        'application/xml' => 'XmlEncoder',
         //'application/rdf+xml' => 'RdfEncoder', todo
+
+        'application/zip' => 'ZipEncoder',
+        'application/x-zip-compressed' => 'ZipEncoder',
+        'multipart/x-zip' => 'ZipEncoder',
+        'application/x-compressed' => 'ZipEncoder',
     ];
     
     public function encoder()

@@ -22,6 +22,7 @@
 namespace oat\taoRestAPI\model\v1\dataEncoder;
 
 
+use oat\taoRestAPI\exception\RestApiException;
 use oat\taoRestAPI\model\DataEncoderInterface;
 
 class RdfEncoder implements DataEncoderInterface
@@ -29,6 +30,9 @@ class RdfEncoder implements DataEncoderInterface
     public function encode($data)
     {
         // TODO: Implement encode() method.
+        if (!is_array($data)) {
+            throw new RestApiException(__('Invalid data for RDF encoder. Wrong HTTP Accept header.'), 400);
+        }
     }
 
     public function getContentType()

@@ -20,14 +20,21 @@
 namespace oat\taoRestAPI\model\v1\dataEncoder;
 
 
+use oat\taoRestAPI\exception\HttpRequestException;
 use oat\taoRestAPI\model\DataEncoderInterface;
 
 class JsonEncoder implements DataEncoderInterface
 {
     public function encode( $data )
     {
-        if (!is_array($data)) {
+        if (is_object($data)) {
             $data = [$data];
+        } elseif (!isset($data)) {
+            $data = [];
+        }
+
+        if (!is_array($data)) {
+            throw new HttpRequestException(__('Invalid data for JSON encoder. Wrong HTTP Accept header.'), 400);
         }
         
         return json_encode($data);

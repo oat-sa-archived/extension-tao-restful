@@ -22,21 +22,20 @@ namespace oat\taoRestAPI\model\v1\dataEncoder;
 
 use oat\taoRestAPI\exception\HttpRequestException;
 use oat\taoRestAPI\model\DataEncoderInterface;
-use tao_helpers_Xml;
 
-class XmlEncoder implements DataEncoderInterface
+class ZipEncoder implements DataEncoderInterface
 {
-    public function encode($data)
+    public function encode( $path )
     {
-        if (!is_array($data)) {
-            throw new HttpRequestException(__('Invalid data for XML encoder. Wrong HTTP Accept header.'), 400);
+        if (!is_string($path) || !file_exists($path) || !is_readable($path)) {
+            throw new HttpRequestException(__('Invalid data for Zip encoder. Wrong HTTP Accept header.'), 400);
         }
 
-        return tao_helpers_Xml::from_array($data);
+        \tao_helpers_Http::returnFile($path, false);
     }
-
+    
     public function getContentType()
     {
-        return 'application/xml';
+        return 'application/zip';
     }
 }

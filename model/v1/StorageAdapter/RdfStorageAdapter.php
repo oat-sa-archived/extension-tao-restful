@@ -255,7 +255,7 @@ abstract class RdfStorageAdapter extends AbstractStorageAdapter
         $resource = new core_kernel_classes_Resource($uri);
         
         if (!$resource->hasType($this->service->getRootClass())) {
-            throw new RestApiException(__('Incorrect identifier type ' . $this->service->getRootClass()->getUri()), 400);
+            throw new RestApiException(__('Incorrect identifier type, should be %s, but has %s', $this->service->getRootClass()->getUri(), print_r($resource->getTypes(), 1)), 400);
         }
         
         return $resource;

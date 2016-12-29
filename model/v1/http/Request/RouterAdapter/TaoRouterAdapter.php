@@ -20,7 +20,7 @@
  */
 
 namespace oat\taoRestAPI\model\v1\http\Request\RouterAdapter;
-use oat\taoRestAPI\exception\HttpRequestException;
+use oat\taoRestAPI\helpers\TaoRouterAdapterHelper;
 
 
 /**
@@ -80,7 +80,7 @@ class TaoRouterAdapter extends AbstractRouterAdapter
     {
         switch ($this->req->getMethod()) {
             case 'PUT':
-                $parameters = \tao_helpers_Http::getJsonDataFromStream();
+                $parameters = TaoRouterAdapterHelper::getJsonDataFromStream();
                 break;
             default:
                 $parameters = $this->req->getParameters();

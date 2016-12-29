@@ -424,6 +424,7 @@ class RestApiServiceTest extends RestApiUnitTestRunner
 
     /**
      * @param $resourceUri
+     *
      * @depends testPost
      */
     public function testPut($resourceUri)
