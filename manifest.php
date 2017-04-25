@@ -27,11 +27,9 @@ return array(
     'version' => '0.0.1',
     'author' => 'Open Assessment Technologies SA',
     'requires' => array(
-        'tao' => '>=2.17.0',
+        'tao' => '>=9.0.0',
     ),
-    'acl' => array(
-     //   array('grant', 'http://www.tao.lu/Ontologies/TAO.rdf#taoRestApiRole', array('ext'=>'taoRestApi')),
-    ),
+    'acl' => array(),
     'install' => array(
     ),
     'uninstall' => array(),
@@ -44,6 +42,5 @@ return array(
     'constants' => array(
         "DIR_VIEWS" => dirname(__FILE__) . DIRECTORY_SEPARATOR . "views" . DIRECTORY_SEPARATOR,
         'BASE_URL' => ROOT_URL . 'taoRestAPI/',
-        'BASE_WWW' => ROOT_URL . 'taoRestAPI/views/'
     ),
 );
