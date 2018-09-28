@@ -24,7 +24,7 @@ return array(
     'label' => 'Rest API Tool',
     'description' => 'RestAPI extension for tao project',
     'license' => 'GPL-2.0',
-    'version' => '0.0.1',
+    'version' => '0.0.2',
     'author' => 'Open Assessment Technologies SA',
     'requires' => array(
         'tao' => '>=2.17.0',
@@ -35,6 +35,7 @@ return array(
     'install' => array(
     ),
     'uninstall' => array(),
+    'update' => 'oat\\taoRestAPI\\scripts\\update\\Updater',
     'routes' => array(
         '/taoRestAPI' => 'oat\\taoRestAPI\\controller',
         'rest-route' => array(
