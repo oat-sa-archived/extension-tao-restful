@@ -14,8 +14,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
- * Copyright (c) 2016  (original work) Open Assessment Technologies SA;
- * 
+ * Copyright (c) 2016-2018  (original work) Open Assessment Technologies SA;
+ *
  * @author Alexander Zagovorichev <zagovorichev@1pt.com>
  */
 
@@ -27,23 +27,25 @@ use oat\tao\model\routing\Route;
 use oat\taoRestAPI\exception\RestApiException;
 use oat\taoRestAPI\helpers\Response;
 use oat\taoRestAPI\service\v1\RestApiService;
+use Psr\Http\Message\ServerRequestInterface;
 
 
 /**
  * #1 Looking for {ExtName}/RestApi/v{int} in url
  * #2 Load Configuration from extension and append it on RestApi router
  * #2.1 Throw Extension if configuration file does not exists
- * 
+ *
  * Class ResourceRoute
  * @package oat\taoRestAPI\model\route
  */
 class ResourceRoute extends Route
 {
     const CONFIG_NAME = 'restApi';
-    
-    public function resolve($relativeUrl) {
+
+    public function resolve(ServerRequestInterface $request)
+    {
         try {
-            
+            $relativeUrl = \tao_helpers_Request::getRelativeUrl($request->getRequestTarget());
             $parts = explode('/', $relativeUrl);
 
             if (preg_match('/RestApi$/', $parts[0]) == 1 && preg_match('/v\d+/', $parts[1]) == 1) {
@@ -72,12 +74,12 @@ class ResourceRoute extends Route
                     }
 
                     $service->execute(function ($router, $encoder) use ($config) {
-                        
+
                         $router (
                             \Context::getInstance()->getRequest(),
                             $config['idRule']
                         );
-                        
+
                         Response::write(
                             $router->getStatusCode(),
                             $encoder->getContentType(),
@@ -85,15 +87,15 @@ class ResourceRoute extends Route
                             $encoder->encode($router->getBodyData())
                         );
                     });
-                    
+
                 } catch (RestApiException $e) {
                     Response::write($e->getCode(), 'text/plain', [], $e->getMessage());
                 }
-                
+
                 // todo If I create controller, then I must to cross tao auth but this route is designed to prevent its use
-                // but I think that exit not better solution 
+                // but I think that exit not better solution
                 exit();
-                
+
             }
         } catch (\ResolverException $r) {
             // namespace does not match URL, aborting
